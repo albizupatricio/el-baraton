@@ -12,4 +12,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
   }
 
+  public goToTop(){
+    window.scroll(0,0);
+  }
 }

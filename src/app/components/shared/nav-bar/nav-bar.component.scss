@@ -1,0 +1,26 @@
+.nav-bar{
+    min-height: 56px;
+    padding: 0 16px;
+    width: 100%;
+    line-height: 50px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background-color: #293462;
+
+    .icon{
+        margin: 10px 0px 0px 16px;
+        background-image: url("../../../../assets/LogoMakr_8tC5ag.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 200px;
+        height: 37px;
+        border: 0;
+        background-size: 200px auto;
+        padding: 17px;
+    }
+
+    .icon:focus {
+        outline:0;
+    }
+}

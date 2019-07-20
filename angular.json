@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -52,6 +53,9 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "es5":{
+              "tsConfig": "./tsconfig.es5.json"
             }
           }
         },
@@ -63,6 +67,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ElBaraton:build:production"
+            },
+            "es5":{
+              "browserTarget": "ElBaraton:build:es5"
             }
           }
         },
@@ -84,6 +91,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -117,6 +125,7 @@
       }
     }
   },
+  
   "defaultProject": "ElBaraton",
   "schematics": {
     "@schematics/angular:component": {
