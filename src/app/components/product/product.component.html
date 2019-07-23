@@ -1,4 +1,39 @@
 <nav-bar></nav-bar>
 <div class="content">
+  <div *ngIf="existProduct  && !loading" class="row product">
+    <div class="col-md-1 col-12">
+      <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
+    </div>
+    <div class="image col-md-4 col-12">
+      <div
+        class="product-img"
+        [ngStyle]="{ 'background-image': defaultImage }"
+      ></div>
+    </div>
+    <div class="info col-md-7 col-12">
+        <h1>{{name | titlecase }}</h1>
+        <h1>Categoria: {{sublevel_name | titlecase}}</h1>
+        <h1>Precio: {{price}}</h1>
+        <h1 *ngIf="quantity > 0">Quedan {{quantity}} productos en stock.</h1>
+        <h1 *ngIf="quantity === 0">No quedan elementos en stock para este producto. </h1>
+        <h1 *ngIf="available">Disponible para la compra.</h1>
+        <h1 *ngIf="!available">Este producto no esta disponible para la compra.</h1>
+        <div class="col-md-12 col-12">
+            <button class="col-md-3 col-sm-6 col-12" [disabled]="quantity === 0">Agregar al carro</button>
+            <button class="col-md-3 col-sm-6 col-12">Concretar compra</button>
+        </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="loading">
+    <div class="col text-center">
+        <div class="spinner-border"></div>
+    </div>
+  </div>
+  <div *ngIf="!existProduct && !loading" class="row row-error">
+    <div class="error-message">
+        <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
+        <p class="message">Disculpe las molestias, el producto que esta buscando no existe o no puede accederse en este momento.</p> 
+    </div>
+  </div>
 </div>
 <footer [backToTop]="false"></footer>
