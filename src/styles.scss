@@ -14,3 +14,18 @@ body{
     -webkit-animation: spinner-border .75s linear infinite;
     animation: spinner-border .75s linear infinite;
 }
+
+.button{
+    background: #216583;
+    border: none;
+    color: white;
+    border: 1px solid white;
+}
+
+.button:focus{
+    outline:0;
+}
+
+.button:hover{
+    background: #293462;
+}

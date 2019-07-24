@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'product',
@@ -17,18 +18,19 @@ export class ProductComponent implements OnInit {
   public price: string = '$5,450';
   public available: boolean = true;
   public sublevel_id: number = 3;
-  public sublevel_name: string = 'Sin azúcar';
+  public sublevel_name: string = 'Bebidas / Gaseosas / Sin azúcar';
   public id: string = '58b5a5b117bf36cf8aed54ab';
 
 
 
-  constructor() { 
+  constructor(private appService: AppService) { 
     this.defaultImage = '';
     this.loading = false;
     this.existProduct = false;
   }
 
   ngOnInit() {
+    this.appService.getProduct();
     this.price = this.price.replace(',','.');
     this.loading = false;
     this.existProduct = true;

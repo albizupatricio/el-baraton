@@ -4,24 +4,27 @@
     <div class="col-md-1 col-12">
       <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
     </div>
-    <div class="image col-md-4 col-12">
+    <div class="image col-md-5 col-12">
       <div
         class="product-img"
         [ngStyle]="{ 'background-image': defaultImage }"
       ></div>
     </div>
-    <div class="info col-md-7 col-12">
-        <h1>{{name | titlecase }}</h1>
-        <h1>Categoria: {{sublevel_name | titlecase}}</h1>
-        <h1>Precio: {{price}}</h1>
-        <h1 *ngIf="quantity > 0">Quedan {{quantity}} productos en stock.</h1>
-        <h1 *ngIf="quantity === 0">No quedan elementos en stock para este producto. </h1>
-        <h1 *ngIf="available">Disponible para la compra.</h1>
-        <h1 *ngIf="!available">Este producto no esta disponible para la compra.</h1>
-        <div class="col-md-12 col-12">
-            <button class="col-md-3 col-sm-6 col-12" [disabled]="quantity === 0">Agregar al carro</button>
-            <button class="col-md-3 col-sm-6 col-12">Concretar compra</button>
-        </div>
+    <div class="info col-md-6 col-12">
+        <h1 class="name">{{name | titlecase }}</h1>
+        <div class="info-line"><span class="category-title">Categoría: </span><span class="category">{{sublevel_name}}</span></div>
+        <div class="info-line">Precio: <span class="price">{{price}}</span></div>
+        <div class="info-line" *ngIf="quantity > 0">Quedan {{quantity}} productos en stock.</div>
+        <div class="info-line no-stock" *ngIf="quantity === 0">No quedan elementos en stock para este producto. </div>
+        <div class="info-line" *ngIf="available && quantity > 0">Disponible para la compra.</div>
+        <div class="info-line no-stock" *ngIf="!available || quantity === 0">Este producto no esta disponible para la compra.</div>
+        <div class="space"></div>
+    </div>
+    <div class="offset-md-6 col-md-6 col-12">
+      <div class="col-md-12 col-12 button-row">
+        <button class="col-md-4 col-sm-6 col-12  button" [disabled]="quantity === 0">Agregar al carro</button>
+        <button class="offset-1 col-md-4 col-sm-6 col-12  button">Concretar compra</button>
+      </div>
     </div>
   </div>
   <div class="row" *ngIf="loading">

@@ -11,6 +11,7 @@
         margin: 16px 0px;
         background: #fff1c1;
         width: 100%;
+        min-height: calc(100vh - 129px);
         .fa-arrow-circle-left{
             font-size: 40px;
             cursor: pointer;
@@ -35,7 +36,32 @@
         }
         .info{
             padding: 30px 0px;
+            .name{
+                font-size: 30px;
+                line-height: 50px; 
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+            .info-line{
+                font-size: 20px;
+                margin-bottom: 10px;
+                .category-title{
+                    font-weight: 500px;
+                }
+                .category{
+                    color: #216583;
+                }
+                &.no-stock{
+                    color: #f76262;
+                }
+                .price{
+                    font-weight: 600;                    
+                }
+            }      
         }
+        .button-row{
+            padding: 0px;
+        }      
     }
     .row-error{
         width: 100%;

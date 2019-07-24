@@ -7,5 +7,8 @@ export class GlobalConstants{
     public readonly BASE_URL: string = 'https://swapi.co/api/';
     
     public readonly apiUrlRoutes = {
+        product(id: string){
+            return `product&${id}`;
+        }
     }
 }
