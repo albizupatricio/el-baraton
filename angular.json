@@ -20,6 +20,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
+              "src/mocks",
               "src/favicon.ico",
               "src/assets"
             ],
@@ -88,6 +89,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
+              "src/mocks",
               "src/favicon.ico",
               "src/assets"
             ],

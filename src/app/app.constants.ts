@@ -4,11 +4,10 @@ import { Injectable } from '@angular/core';
 export class GlobalConstants{
     constructor(){}
     
-    public readonly BASE_URL: string = 'https://swapi.co/api/';
+    public readonly BASE_URL: string = '';
     
     public readonly apiUrlRoutes = {
-        product(id: string){
-            return `product&${id}`;
-        }
+        products: '../mocks/products.json',
+        categories: '../mocks/categories.json',
     }
 }

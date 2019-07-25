@@ -1,6 +1,6 @@
 export interface Product{
     quantity: number;
-    price: number;
+    price: string;
     available: boolean;
     sublevel_id: number;
     name: string;
