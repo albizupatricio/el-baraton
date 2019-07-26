@@ -13,7 +13,8 @@
     "available": true,
     "sublevel_id": 3,
     "name": "mollit",
-    "id": "58b5a5b117bf36cf8aed54ab"
+    "id": "58b5a5b117bf36cf8aed54ab",
+    "photo_url": "https://www.vestasalamanca.com/wp-content/uploads/2017/02/port-x10-800x500.jpg"
   },
   {
     "quantity": 698,
@@ -291,7 +292,7 @@
     "quantity": 687,
     "price": "$15,006",
     "available": true,
-    "sublevel_id": 8,
+    "sublevel_id": 15,
     "name": "proident",
     "id": "58b5a5b1b7b2382511968d1e"
   },

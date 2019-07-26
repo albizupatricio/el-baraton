@@ -29,3 +29,8 @@ body{
 .button:hover{
     background: #293462;
 }
+
+.button:disabled{
+    background: lightgray;
+    cursor: not-allowed;
+}

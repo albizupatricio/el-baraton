@@ -1,6 +1,6 @@
 <nav-bar></nav-bar>
 <div class="content">
-  <div *ngIf="existProduct  && !loading" class="row product">
+  <div *ngIf="product && existProduct  && !loading" class="row product">
     <div class="col-md-1 col-12">
       <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
     </div>
@@ -12,7 +12,7 @@
     </div>
     <div class="info col-md-6 col-12">
         <h1 class="name">{{product.name | titlecase }}</h1>
-        <div class="info-line"><span class="category-title">Categoría: </span><span class="category">{{product.sublevel_name}}</span></div>
+        <div class="info-line"><span class="category-title">Categoría: </span><span class="category">{{product.categoryTitles}}</span></div>
         <div class="info-line">Precio: <span class="price">{{product.price}}</span></div>
         <div class="info-line" *ngIf="product.quantity > 0">Quedan {{product.quantity}} productos en stock.</div>
         <div class="info-line no-stock" *ngIf="product.quantity === 0">No quedan elementos en stock para este producto. </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="offset-md-6 col-md-6 col-12">
       <div class="col-md-12 col-12 button-row">
-        <button class="col-md-4 col-sm-6 col-12  button" [disabled]="quantity === 0">Agregar al carro</button>
+        <button class="col-md-4 col-sm-6 col-12  button" [disabled]="!product.available || product.quantity === 0">Agregar al carro</button>
         <button class="offset-1 col-md-4 col-sm-6 col-12  button">Concretar compra</button>
       </div>
     </div>
