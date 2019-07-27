@@ -7,20 +7,47 @@
     z-index: 2;
     top: 0;
     background-color: #293462;
-
-    .icon{
-        margin: 10px 0px 0px 16px;
-        background-image: url("../../../../assets/LogoMakr_8tC5ag.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        width: 200px;
-        height: 37px;
-        border: 0;
-        background-size: 200px auto;
-        padding: 17px;
-    }
-
-    .icon:focus {
-        outline:0;
+    .row{
+        min-height: 56px;
+        .icon{
+            margin: 10px 0px 0px 16px;
+            background-image: url("../../../../assets/LogoMakr_8tC5ag.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 200px;
+            height: 37px;
+            border: 0;
+            background-size: 200px auto;
+            padding: 17px;
+        }
+        .icon:focus{
+            outline:0;
+        }
+        .col{
+            .cart{
+                cursor: pointer;
+                width: 60px;
+                min-height: 56px;
+                .fa-shopping-cart{
+                    color: white;
+                    font-size: 42px;
+                    position: relative;
+                    top: 12px;
+                }
+                .badge-light{
+                    color: white;
+                    background-color: #216583;
+                    right: 25px;
+                    top: 5px;
+                    border: 1px solid #fff1c1;
+                    position: absolute;
+                    font-size: 90%;
+                    font-weight: 500;
+                }
+            }
+            .cart:focus{
+                outline:0;
+            }
+        }
     }
 }

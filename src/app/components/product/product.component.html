@@ -1,4 +1,4 @@
-<nav-bar></nav-bar>
+<nav-bar [cartVisible]="true"></nav-bar>
 <div class="content">
   <div *ngIf="product && existProduct  && !loading" class="row product">
     <div class="col-md-1 col-12">
@@ -22,8 +22,8 @@
     </div>
     <div class="offset-md-6 col-md-6 col-12">
       <div class="col-md-12 col-12 button-row">
-        <button class="col-md-4 col-sm-6 col-12  button" [disabled]="!product.available || product.quantity === 0">Agregar al carro</button>
-        <button class="offset-1 col-md-4 col-sm-6 col-12  button">Concretar compra</button>
+        <button class="col-md-4 col-sm-6 col-12 button" [disabled]="!product.available || product.quantity === 0 || addingProduct" (click)="insertInCart(product)">Agregar al carro</button>
+        <button class="offset-1 col-md-4 col-sm-6 col-12 button" [disabled]="addingProduct" routerLink="/purchase">Concretar compra</button>
       </div>
     </div>
   </div>

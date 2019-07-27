@@ -1,5 +1,11 @@
 <div class="nav-bar">
     <div class="row">
         <button routerLink="/homepage" class="icon"></button>
+        <div class="col">
+            <div routerLink="/purchase" *ngIf="cartVisible" class="cart float-right">
+                <div class="fa fa-shopping-cart"></div>
+                <span *ngIf="productsQuantity > 0" class="badge badge-light">{{productsQuantity}}</span>
+            </div>
+        </div>
     </div>
 </div>
