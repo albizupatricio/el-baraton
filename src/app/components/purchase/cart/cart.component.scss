@@ -1,0 +1,10 @@
+.content{
+    min-height: calc(100vh - 177px);
+    background: #fff1c1;
+    height: 100%;
+    width: calc( 100vw - 33px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

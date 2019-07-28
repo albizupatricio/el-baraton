@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseService } from '../purchase.service';
 
 @Component({
-  selector: 'payment-method',
-  templateUrl: './payment-method.component.html',
-  styleUrls: ['./payment-method.component.scss']
+  selector: 'summary',
+  templateUrl: './summary.component.html',
+  styleUrls: ['./summary.component.scss']
 })
-export class PaymentMethodComponent implements OnInit {
+export class SummaryComponent implements OnInit {
 
   constructor(private purchaseService: PurchaseService) { }
 

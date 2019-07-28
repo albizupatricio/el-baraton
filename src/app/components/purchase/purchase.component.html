@@ -1,1 +1,18 @@
 <nav-bar [cartVisible]="false"></nav-bar>
+<div class="content">
+    <div class="row tab-selector">
+        <span class="badge badge-pill badge-info" (click)="selectTab(globalConstants.tabs.cart)">Carro</span>
+        <div class="line" [ngClass]="{'disabled-line': !tabEnabled[globalConstants.tabs.paymentMethod]}"></div>
+        <span class="badge badge-pill badge-info" (click)="selectTab(globalConstants.tabs.paymentMethod)" [ngClass]="{'disabled-element': !tabEnabled[globalConstants.tabs.paymentMethod]}">Método de Pago</span>
+        <div class="line" [ngClass]="{'disabled-line': !tabEnabled[globalConstants.tabs.summary]}"></div>
+        <span class="badge badge-pill badge-info" (click)="selectTab(globalConstants.tabs.summary)" [ngClass]="{'disabled-element': !tabEnabled[globalConstants.tabs.summary]}">Resumen</span>
+    </div>
+    <div class="row">
+        <div [ngSwitch]="tab" class="row">
+            <cart *ngSwitchCase="globalConstants.tabs.cart"></cart>
+            <payment-method *ngSwitchCase="globalConstants.tabs.paymentMethod"></payment-method>
+            <summary *ngSwitchCase="globalConstants.tabs.summary"></summary>
+        </div>
+    </div>
+</div>
+<footer [backToTop]="false"></footer>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchaseService } from '../purchase.service';
 
 @Component({
   selector: 'cart',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private purchaseService: PurchaseService) { }
 
   ngOnInit() {
+  }
+
+  public goToTab(){
+    this.purchaseService.triggerTabUpdate(true);
   }
 
 }

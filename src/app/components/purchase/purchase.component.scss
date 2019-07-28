@@ -1,0 +1,35 @@
+.content{
+    min-height: calc(100vh - 40px);
+    padding: 56px 16px 1px 16px;
+    background: #f76262;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+    .row{
+        .line{
+            width: 100px;
+            border-bottom: 2px solid #fff1c1;
+            margin: 0px 8px 11px 8px;
+        }
+        .badge-info{
+            font-size: 1rem;
+            font-weight: 100;
+            background: #fff1c1;
+            color: black;
+            cursor:pointer;
+        }
+        .disabled-element{
+            background: gray;
+            cursor: not-allowed;
+            color: white;
+        }
+        .disabled-line{
+            border-bottom: 2px solid grey; 
+        }
+    }
+    .tab-selector{
+        margin: 20px 0px;
+    }
+}
