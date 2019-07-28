@@ -22,8 +22,14 @@
     </div>
     <div class="offset-md-6 col-md-6 col-12">
       <div class="col-md-12 col-12 button-row">
-        <button class="col-md-4 col-sm-6 col-12 button" [disabled]="!product.available || product.quantity === 0 || addingProduct" (click)="insertInCart(product)">Agregar al carro</button>
-        <button class="offset-1 col-md-4 col-sm-6 col-12 button" [disabled]="addingProduct" routerLink="/purchase">Concretar compra</button>
+        <button class="col-md-4 col-sm-6 col-12 button" [disabled]="!product.available || product.quantity === 0 || addingProduct" (click)="insertInCart(product)">
+          <i class="fa fa-shopping-cart"></i>
+          Agregar al carro
+        </button>
+        <button class="offset-1 col-md-4 col-sm-6 col-12 button" [disabled]="addingProduct" routerLink="/purchase">
+          <i class="fa fa-credit-card"></i>
+          Concretar compra
+        </button>
       </div>
     </div>
   </div>

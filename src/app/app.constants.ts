@@ -10,4 +10,10 @@ export class GlobalConstants{
         products: '../mocks/products.json',
         categories: '../mocks/categories.json',
     }
+
+    public readonly tabs = {
+        cart: 0,
+        paymentMethod: 1,
+        summary: 2
+    }
 }
