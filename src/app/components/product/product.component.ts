@@ -78,12 +78,13 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   public insertInCart(product: Product) {
     this.addingProduct = true;
-    this.cartService.addProduct(product.id, product.name, product.price);
+    this.cartService.addProduct(product.id, product.name, parseFloat(product.price.substr(1)));
     Swal.fire(
       "Agregado",
-      `El producto ${this.product.name} fue agregado a tu carro de compras`,
+      `${this.product.name.charAt(0).toUpperCase()}${this.product.name.slice(1)} fue agregado a tu carro de compras.`,
       "success"
     ).finally(() => {
+      this.product.quantity -= 1;
       this.addingProduct = false;
     });
   }

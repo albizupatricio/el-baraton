@@ -16,10 +16,14 @@ body{
 }
 
 .button{
+    padding-right: 10px;
     background: #216583;
     border: none;
     color: white;
-    border: 1px solid white;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+    height: 38px;
+    font-size: 18px;
 }
 
 .button:focus{
@@ -33,4 +37,20 @@ body{
 .button:disabled{
     background: lightgray;
     cursor: not-allowed;
+}
+
+.swal2-confirm{
+    background: #216583 !important;
+}
+
+.swal2-confirm:hover{
+    background: #293462 !important;
+}
+
+.swal2-success-ring{
+    border: .25em solid #293462 !important;
+}
+
+.swal2-icon.swal2-success [class^=swal2-success-line]{
+    background-color: #293462 !important;
 }

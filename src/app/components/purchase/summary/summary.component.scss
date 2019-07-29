@@ -1,10 +1,4 @@
-.content{
-    min-height: calc(100vh - 180px);
-    background: #fff1c1;
-    height: 100%;
-    width: calc( 100vw - 35px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.title{
+    font-size: 35px;
+    font-weight: 500;
 }

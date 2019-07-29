@@ -1,4 +1,34 @@
+
+<div class="col">
+    <h1 class="title">Carro de Compras</h1>
+</div>
 <div class="content">
-    Carro
-    <button (click)="goToTab()">Next</button>
+    <div *ngIf="products.length > 0" class="row products">
+        Pepe
+    </div>
+    <div *ngIf="products.length == 0" class="error-message">
+        <i class="col-1 fa fa-exclamation-triangle"></i>
+        <div class="col-11">
+            <div>El carro está vacío.</div> 
+            <div>Para comprar uno o más artículos haga clic en el botón <strong>"Agregar al carro"</strong> en el menú inicial o en la página de detalle del producto.</div>
+        </div>
+    </div>
+</div>
+<div class="col buttons-container">
+    <div class="col">
+        <div class="final-price float-right">
+            <span class="price-title">
+                Precio Final:
+            </span>
+            <span class="price">
+                ${{totalPrice}}
+            </span>
+        </div>
+    </div>
+    <div class="col">
+        <button (click)="goToTab()" class="button float-right" [disabled]="products.length == 0">
+                <i class="fa fa-credit-card"></i>
+                Cargar Método de Pago
+        </button>
+    </div>
 </div>

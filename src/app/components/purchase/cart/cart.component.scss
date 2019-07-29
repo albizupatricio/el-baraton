@@ -1,10 +1,47 @@
+.title{
+    font-size: 35px;
+    font-weight: 500;
+}
 .content{
-    min-height: calc(100vh - 177px);
-    background: #fff1c1;
-    height: 100%;
-    width: calc( 100vw - 33px);
+    padding: 15px; 
+    min-height: calc(100vh - 373px);
+    .error-message{
+        display: flex;
+        margin-top: 30px;
+        .fa-exclamation-triangle{
+            font-size: 45px;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+        }
+    }
+    .products{
+        margin-top: 30px;
+        
+    }
+}
+
+.buttons-container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    .col{
+        padding-right: 0px;
+        .final-price{
+            margin-right: 7px;
+            margin-bottom: 10px;
+            .price-title{
+                position: relative;
+                bottom: 6px;
+            }
+            .price{
+                margin-left: 15px;
+                font-size: 35px;
+            }
+        }
+        .button{
+            .fa-credit-card{
+                margin: 0px 10px;
+            }
+        }
+    }
 }

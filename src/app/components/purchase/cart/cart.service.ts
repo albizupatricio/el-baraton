@@ -45,7 +45,7 @@ export class CartService {
     localStorage.clear();
   }
 
-  public addProduct(id: string, name: string, price: string): void {
+  public addProduct(id: string, name: string, price: number): void {
     let productsArray: SelectedProduct[] = JSON.parse(
       localStorage.getItem("products")
     );

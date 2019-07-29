@@ -9,7 +9,7 @@
     align-items: center;
     .product{
         margin: 16px 0px;
-        background: #fff1c1;
+        background: #f8f1f1;
         width: 100%;
         min-height: calc(100vh - 129px);
         .fa-arrow-circle-left{
@@ -49,7 +49,7 @@
                     font-weight: 500px;
                 }
                 .category{
-                    color: #216583;
+                    color: #7d7d7d;;
                 }
                 &.no-stock{
                     color: #f76262;
@@ -71,11 +71,11 @@
         }      
     }
     .row-error{
-        width: 100%;
+        max-width: 1046px;
         .error-message{
             display: inline-flex;
             margin-bottom: 0px;
-            background: #fff1c1;
+            background: #f8f1f1;
             padding: 20px;
             border-radius: 10px;
             width: 100%;

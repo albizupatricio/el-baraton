@@ -1,6 +1,6 @@
 export interface SelectedProduct{
     quantity: number;
-    price: string;
+    price: number;
     name: string;
     id: string;
 }
