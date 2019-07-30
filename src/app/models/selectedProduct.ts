@@ -3,4 +3,5 @@ export interface SelectedProduct{
     price: number;
     name: string;
     id: string;
+    photoUrl: string;
 }

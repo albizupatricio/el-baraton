@@ -4,7 +4,40 @@
 </div>
 <div class="content">
     <div *ngIf="products.length > 0" class="row products">
-        Pepe
+        <div class="content">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products; let pos = index">
+                        <td>{{product.name}}</td>
+                        <td>${{product.price}}</td>
+                        <td>
+                            <button *ngIf="product.quantity > 1" (click)="decreaseProduct(product)" class="button">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            {{product.quantity}}
+                            <button *ngIf="product.quantity < 10" (click)="addProduct(product)" class="button">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button (click)="deleteProduct(product, pos)" class="button">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <div *ngIf="products.length == 0" class="error-message">
         <i class="col-1 fa fa-exclamation-triangle"></i>
@@ -15,18 +48,18 @@
     </div>
 </div>
 <div class="col buttons-container">
-    <div class="col">
+    <div  class="col">
         <div class="final-price float-right">
             <span class="price-title">
-                Precio Final:
+                Precio Total:
             </span>
             <span class="price">
-                ${{totalPrice}}
+                ${{totalPrice | number : '1.2'}}
             </span>
         </div>
     </div>
     <div class="col">
-        <button (click)="goToTab()" class="button float-right" [disabled]="products.length == 0">
+        <button (click)="goToTab()" class="button next float-right" [disabled]="products.length == 0">
                 <i class="fa fa-credit-card"></i>
                 Cargar Método de Pago
         </button>

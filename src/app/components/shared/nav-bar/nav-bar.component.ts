@@ -20,14 +20,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.productsQuantity = this.cartService.getSavedProductsQuantity();
-    this.subs.push(this.cartService.getCounterUpdate().subscribe((adding: boolean)=>{
-      if(adding){
-        this.productsQuantity += 1;
-      }else{
-        this.productsQuantity -= 1;
-      }
-    }));
+    if(this.cartVisible){
+      this.productsQuantity = this.cartService.getSavedProductsQuantity();
+      this.subs.push(this.cartService.getCounterUpdate().subscribe((adding: boolean)=>{
+        if(adding){
+          this.productsQuantity += 1;
+        }else{
+          this.productsQuantity -= 1;
+        }
+      }));
+    }
   }
 
   ngOnDestroy() {

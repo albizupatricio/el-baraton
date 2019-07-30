@@ -45,7 +45,7 @@ export class CartService {
     localStorage.clear();
   }
 
-  public addProduct(id: string, name: string, price: number): void {
+  public addProduct(id: string, name: string, price: number, photo: string): void {
     let productsArray: SelectedProduct[] = JSON.parse(
       localStorage.getItem("products")
     );
@@ -66,7 +66,8 @@ export class CartService {
         id: id,
         name: name,
         price: price,
-        quantity: 1
+        quantity: 1,
+        photoUrl: photo
       }
       productsArray.push(product);
     }
@@ -79,18 +80,14 @@ export class CartService {
       localStorage.getItem("products")
     );
     if(productsArray){
-      productsArray = productsArray.map((product) => { 
-        if(product.id === id){
-          if(product.quantity > 1){
-            product.quantity -= 1;
-          }else {
-            return;
-          }
+      productsArray = productsArray.filter((product) => { 
+        if(product.id !== id){
+          return product;
         }
-        return product;
       });
-      localStorage.setItem('products', JSON.stringify(productsArray));
-      this.triggerCounterUpdate(false);
+      if(productsArray){
+        localStorage.setItem('products', JSON.stringify(productsArray));
+      }
     }
   }
 
@@ -100,5 +97,33 @@ export class CartService {
 
   private triggerCounterUpdate(adding: boolean): void{
     this.updateCartCounter.emit(adding);
+  }
+
+  public increaseProductQuantity(id: string): void{
+    let productsArray: SelectedProduct[] = JSON.parse(
+      localStorage.getItem("products")
+    );
+    productsArray = productsArray.map((product) => { 
+      if(product.id === id){
+        product.quantity += 1;
+      }
+      return product;
+    });
+    localStorage.setItem('products', JSON.stringify(productsArray));
+    this.triggerCounterUpdate(true);
+  }
+
+  public decreaseProductQuantity(id: string): void{
+    let productsArray: SelectedProduct[] = JSON.parse(
+      localStorage.getItem("products")
+    );
+    productsArray = productsArray.map((product) => { 
+      if(product.id === id){
+        product.quantity -= 1;
+      }
+      return product;
+    });
+    localStorage.setItem('products', JSON.stringify(productsArray));
+    this.triggerCounterUpdate(false);
   }
 }

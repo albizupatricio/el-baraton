@@ -11,7 +11,7 @@
       ></div>
     </div>
     <div class="info col-md-6 col-12">
-        <h1 class="name">{{product.name | titlecase }}</h1>
+        <h1 class="name">{{product.name}}</h1>
         <div class="info-line"><span class="category-title">Categoría: </span><span class="category">{{product.categoryTitles}}</span></div>
         <div class="info-line">Precio: <span class="price">{{product.price}}</span></div>
         <div class="info-line" *ngIf="product.quantity > 0">Quedan {{product.quantity}} productos en stock.</div>

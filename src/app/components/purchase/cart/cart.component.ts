@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.products = this.cartService.getAllSavedProducts();
-    this.addProducts();
+    this.calculateTotalPrince();
 
   }
 
@@ -28,11 +28,29 @@ export class CartComponent implements OnInit {
     this.purchaseService.triggerTabUpdate(true);
   }
 
-  private addProducts(): void{
+  private calculateTotalPrince(): void{
     let price = 0; 
     this.products.forEach((product)=>{
       price += product.price * product.quantity;
     });
     this.totalPrice = price;
+  }
+
+  public addProduct(product: SelectedProduct){
+    this.cartService.increaseProductQuantity(product.id);
+    product.quantity += 1;
+    this.calculateTotalPrince();
+  }
+
+  public decreaseProduct(product: SelectedProduct){
+    this.cartService.decreaseProductQuantity(product.id);
+    product.quantity -= 1;
+    this.calculateTotalPrince();
+  }
+
+  public deleteProduct(product: SelectedProduct, pos: number){
+    this.cartService.removeProduct(product.id);
+    this.products.splice(pos, 1);
+    this.calculateTotalPrince();
   }
 }
