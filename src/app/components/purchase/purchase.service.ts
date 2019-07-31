@@ -6,6 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class PurchaseService {
 
   private updateTabCounter: EventEmitter<boolean> = new EventEmitter();
+  private emptyCart: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
@@ -15,5 +16,13 @@ export class PurchaseService {
 
   public triggerTabUpdate(next: boolean): void{
     this.updateTabCounter.emit(next);
+  }
+
+  public getEmptyCart(): EventEmitter<void>{
+    return this.emptyCart;
+  }
+
+  public triggerEmptyCart(): void{
+    this.emptyCart.emit();
   }
 }

@@ -1,6 +1,17 @@
-
-        <div class="col">
-            <h1 class="title">Método de Pago</h1>
-        </div>    
-    <button (click)="goToTab(true)">Next</button>
-    <button (click)="goToTab(false)">Back</button>
+<div class="col">
+  <h1 class="title">Método de Pago</h1>
+</div>
+<div class="content">
+</div>
+<div class="col buttons-container">
+  <div class="col">
+    <button (click)="goToTab(false)" class="button next float-left">
+      <i class="fa fa-shopping-cart"></i>
+      Volver al carro de compras
+    </button>
+    <button (click)="goToTab(true)" class="button next float-right">
+      <i class="fa fa-credit-card"></i>
+      Finalizar Compra
+    </button>
+  </div>
+</div>

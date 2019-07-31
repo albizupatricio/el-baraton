@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Location } from "@angular/common";
 import { ProductService } from "./product.service";
 import { Product } from "../../models/product";
 import { Category } from "../../models/category";
@@ -25,7 +26,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ) {
     this.loading = true;
     this.existProduct = true;
@@ -43,7 +45,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     );
   }
 
-  private loadProduct(id: string) {
+  private loadProduct(id: string): void {
     this.subs.push(
       this.productService.getProduct(id).subscribe((product: Product) => {
         if (product) {
@@ -65,9 +67,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     );
   }
 
-  private setProductValues(product: Product, categoryTitles: string) {
+  private setProductValues(product: Product, categoryTitles: string): void {
+    const productInCart = this.cartService.getSelectedProduct(product.id);
+    const productQuantity = productInCart ? productInCart.quantity: 0;  
     this.product = {
       ...product,
+      quantity: product.quantity - productQuantity,
       name: product.name.charAt(0).toUpperCase() + product.name.slice(1),
       price: product.price,
       categoryTitles: categoryTitles ? categoryTitles : "No identificada",
@@ -77,7 +82,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     };
   }
 
-  public insertInCart(product: Product) {
+  public insertInCart(product: Product): void {
     this.addingProduct = true;
     this.cartService.addProduct(product.id, product.name, parseFloat(product.price.substr(1).replace('.','').replace(",",".")), product.photo_url);
     Swal.fire(
@@ -88,6 +93,10 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.product.quantity -= 1;
       this.addingProduct = false;
     });
+  }
+
+  public goBack(){
+    this.location.back();
   }
 
   ngOnDestroy() {

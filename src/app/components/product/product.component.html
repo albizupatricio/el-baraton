@@ -2,7 +2,7 @@
 <div class="content">
   <div *ngIf="product && existProduct  && !loading" class="row product">
     <div class="col-md-1 col-12">
-      <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
+      <div (click)="goBack()" class="fa fa-arrow-circle-left"></div>
     </div>
     <div class="image col-md-5 col-12">
       <div
@@ -40,7 +40,7 @@
   </div>
   <div *ngIf="!existProduct && !loading" class="row row-error">
     <div class="error-message">
-        <div routerLink="/homepage" class="fa fa-arrow-circle-left"></div>
+        <div (click)="goBack()" class="fa fa-arrow-circle-left"></div>
         <p class="message">Disculpe las molestias, el producto que esta buscando no existe o no puede accederse en este momento.</p> 
     </div>
   </div>

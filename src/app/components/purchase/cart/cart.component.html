@@ -4,39 +4,41 @@
 </div>
 <div class="content">
     <div *ngIf="products.length > 0" class="row products">
-        <div class="content">
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let product of products; let pos = index">
-                        <td>{{product.name}}</td>
-                        <td>${{product.price}}</td>
-                        <td>
-                            <button *ngIf="product.quantity > 1" (click)="decreaseProduct(product)" class="button">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            {{product.quantity}}
-                            <button *ngIf="product.quantity < 10" (click)="addProduct(product)" class="button">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button (click)="deleteProduct(product, pos)" class="button">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products; let pos = index">
+                    <td class="align-middle name" [routerLink]="['/product', product.id]">
+                        <div class="product-img" [ngStyle]="{ 'background-image': product.photoUrl }"></div>
+                    </td>
+                    <td class="align-middle name" [routerLink]="['/product', product.id]">{{product.name}}</td>
+                    <td class="align-middle">${{product.price}}</td>
+                    <td class="align-middle">
+                        <button [disabled]="product.quantity <= 1" (click)="decreaseProduct(product)" class="button">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        {{product.quantity}}
+                        <button [disabled]="product.quantity >= 10" (click)="addProduct(product)" class="button">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </td>
+                    <td class="align-middle">
+                        <button (click)="deleteProduct(product, pos)" class="button">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div *ngIf="products.length == 0" class="error-message">

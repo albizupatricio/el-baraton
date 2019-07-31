@@ -22,9 +22,6 @@ import { SummaryComponent } from './summary/summary.component';
     FormsModule,
     SharedModule,
     RouterModule.forChild(purchaseRoutes)
-  ],
-  exports: [
-    RouterModule
   ]
 })
 export class PurchaseModule { }

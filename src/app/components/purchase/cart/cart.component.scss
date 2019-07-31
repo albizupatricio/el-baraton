@@ -3,7 +3,7 @@
     font-weight: 500;
 }
 .content{
-    padding: 15px; 
+    padding: 70px 50px 20px 50px;
     min-height: calc(100vh - 393px);
     .error-message{
         display: flex;
@@ -16,8 +16,37 @@
         }
     }
     .products{
-        margin-top: 30px;
-        
+        .table{
+            width: 100%;
+            th{
+                text-align: center;
+            }
+            td{
+                text-align: center;
+                .product-img{
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    width: 100px;
+                    height: 100px;
+                    border: 0;
+                    background-size: 150px auto;
+                }
+                &.name{
+                  cursor: pointer;
+                  font-size: 22px;
+                }
+                &.name:hover{
+                    color: #216583;
+                }
+                &.name:focus{
+                    outline: 0;
+                }
+            }
+        }
+        .button{
+            width: 50px;
+            margin: 0px 10px;
+        }
     }
 }
 
@@ -39,7 +68,7 @@
             }
         }
         .button{
-            padding-right: 10px;
+            padding-right: 10px;            
             .fa-credit-card{
                 margin: 0px 10px;
             }

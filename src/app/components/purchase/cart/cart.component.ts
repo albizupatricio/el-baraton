@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
 
   }
 
-  public goToTab(){
+  public goToTab(): void{
     this.purchaseService.triggerTabUpdate(true);
   }
 
@@ -36,21 +36,24 @@ export class CartComponent implements OnInit {
     this.totalPrice = price;
   }
 
-  public addProduct(product: SelectedProduct){
+  public addProduct(product: SelectedProduct): void{
     this.cartService.increaseProductQuantity(product.id);
     product.quantity += 1;
     this.calculateTotalPrince();
   }
 
-  public decreaseProduct(product: SelectedProduct){
+  public decreaseProduct(product: SelectedProduct): void{
     this.cartService.decreaseProductQuantity(product.id);
     product.quantity -= 1;
     this.calculateTotalPrince();
   }
 
-  public deleteProduct(product: SelectedProduct, pos: number){
+  public deleteProduct(product: SelectedProduct, pos: number): void{
     this.cartService.removeProduct(product.id);
     this.products.splice(pos, 1);
     this.calculateTotalPrince();
+    if(this.products.length == 0){
+      this.purchaseService.triggerEmptyCart();
+    }
   }
 }

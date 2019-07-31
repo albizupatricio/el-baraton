@@ -30,8 +30,11 @@ export class PurchaseComponent implements OnInit, OnDestroy {
       }else{
         this.selectTab(this.tab - 1);
       }
-      console.log(this.tabEnabled[this.globalConstants.tabs.paymentMethod]);
-    }));
+    }),
+    this.purchaseService.getEmptyCart().subscribe(()=>{
+        this.tabEnabled = [true, false, false];
+      }
+    ));
   }
 
   public selectTab(tab: number){
