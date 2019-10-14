@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GlobalConstants } from '../../app.constants';
 import { PurchaseService } from './purchase.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-purchase',
@@ -13,11 +14,25 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   public tab: number;
   public tabEnabled: Array<boolean>;
   private subs: Subscription[];
+  public purchaseForm: FormGroup;
 
-  constructor(private globalConstants: GlobalConstants, private purchaseService: PurchaseService) { 
+  constructor(private globalConstants: GlobalConstants, 
+              private purchaseService: PurchaseService,
+              private fb: FormBuilder) { 
     this.tab = this.globalConstants.tabs.cart;
     this.tabEnabled = [true, false, false];
     this.subs = [];
+    this.purchaseForm = this.fb.group({
+      products: this.fb.array([]),
+      totalPrice: [0],
+      cashPayment: [true],
+      store: [''],
+      cardNumber: [''],
+      adress: [''],
+      phone: [''],
+      name: [''],
+      lastName: ['']
+    });
   }
 
   ngOnInit() {

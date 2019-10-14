@@ -8,9 +8,9 @@
         <span class="badge badge-pill badge-info button" (click)="selectTab(globalConstants.tabs.summary)" [ngClass]="{'disabled-element': !tabEnabled[globalConstants.tabs.summary]}">Resumen</span>
     </div>
     <div [ngSwitch]="tab" class="content">
-        <cart *ngSwitchCase="globalConstants.tabs.cart"></cart>
-        <payment-method *ngSwitchCase="globalConstants.tabs.paymentMethod"></payment-method>
-        <summary *ngSwitchCase="globalConstants.tabs.summary"></summary>
+        <cart *ngSwitchCase="globalConstants.tabs.cart" [purchaseForm]='purchaseForm'></cart>
+        <payment-method *ngSwitchCase="globalConstants.tabs.paymentMethod" [purchaseForm]='purchaseForm'></payment-method>
+        <summary *ngSwitchCase="globalConstants.tabs.summary"  [purchaseForm]='purchaseForm'></summary>
     </div>
 </div>
 <footer [backToTop]="false"></footer>

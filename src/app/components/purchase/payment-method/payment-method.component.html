@@ -2,6 +2,54 @@
   <h1 class="title">Método de Pago</h1>
 </div>
 <div class="content">
+  <div class="col-10 information">
+    <div class="col-4 label">
+      Total a pagar
+    </div>
+    <div class="col-8 price">
+        ${{totalPriceCtrl.value | number : '1.2'}}
+    </div>
+  </div>
+  <div class="col-10 information">
+    <div class="col-4 label">
+        Seleccione método de pago
+      </div>
+      <div class="col-8 cash-card">
+          <label class="radio-button">
+            <div class="radio-element">              
+              <input type="radio" [value]="true" [formControl]="purchaseForm.get('cashPayment')">
+            </div>            
+            <span>Efectivo</span>
+          </label>
+          <label class="radio-button">
+            <div class="radio-element">
+              <input type="radio" [value]="false" [formControl]="purchaseForm.get('cashPayment')">
+            </div>            
+            <span>Tarjeta de Crédito</span>
+          </label>          
+      </div>
+  </div>
+  <div class="label-separator" *ngIf="purchaseForm.get('cashPayment').value">Abona con efectivo, retira en sucursal</div>
+  <div class="label-separator" *ngIf="!purchaseForm.get('cashPayment').value">Abona con tarjeta, recibe en su domicilio</div>
+  <!-- <div class="col-10 information">
+    <div class="col-4 label">
+        Seleccione método de pago
+      </div>
+      <div class="col-8 cash-card">
+          <label class="radio-button">
+            <div class="radio-element">              
+              <input type="radio" [value]="true" [formControl]="purchaseForm.get('cashPayment')">
+            </div>            
+            <span>Efectivo</span>
+          </label>
+          <label class="radio-button">
+            <div class="radio-element">
+              <input type="radio" [value]="false" [formControl]="purchaseForm.get('cashPayment')">
+            </div>            
+            <span>Tarjeta de Crédito</span>
+          </label>          
+      </div>
+  </div>   -->
 </div>
 <div class="col buttons-container">
   <div class="col">

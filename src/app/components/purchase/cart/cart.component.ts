@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PurchaseService } from '../purchase.service';
 import { SelectedProduct } from 'src/app/models/selectedProduct';
 import { CartService } from './cart.service';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'cart',
@@ -10,18 +11,32 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
 
-  public products: SelectedProduct[];
-  public totalPrice: number;
+  @Input() purchaseForm: FormGroup;
+  
+  public totalPriceCtrl: FormControl;
+  public productsCtrl: FormArray;
 
-  constructor(private purchaseService: PurchaseService, private cartService: CartService) { 
-    this.products = [];
-    this.totalPrice = 0;
-  }
+  constructor(private purchaseService: PurchaseService, 
+              private cartService: CartService,
+              private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.products = this.cartService.getAllSavedProducts();
+    this.totalPriceCtrl = this.purchaseForm.get('totalPrice') as FormControl;
+    this.totalPriceCtrl.setValue(0);
+    this.productsCtrl = this.purchaseForm.get('products') as FormArray;
+    this.productsCtrl = this.fb.array([]);
+    this.cartService.getAllSavedProducts().map((product : SelectedProduct)=>{
+      this.productsCtrl.push(
+        this.fb.group({
+          quantity: [product.quantity],
+          price: [product.price],
+          name: [product.name],
+          id: [product.id],
+          photoUrl: [product.photoUrl]
+        })
+      );
+    })
     this.calculateTotalPrince();
-
   }
 
   public goToTab(): void{
@@ -30,29 +45,29 @@ export class CartComponent implements OnInit {
 
   private calculateTotalPrince(): void{
     let price = 0; 
-    this.products.forEach((product)=>{
-      price += product.price * product.quantity;
+    this.productsCtrl.controls.forEach((product: FormGroup)=>{
+      price += product.get('price').value * product.get('quantity').value;
     });
-    this.totalPrice = price;
+    this.totalPriceCtrl.setValue(price);
   }
 
-  public addProduct(product: SelectedProduct): void{
-    this.cartService.increaseProductQuantity(product.id);
-    product.quantity += 1;
+  public addProduct(product: FormGroup): void{
+    this.cartService.increaseProductQuantity(product.get('id').value);  
+    product.controls.quantity.setValue(product.controls.quantity.value + 1);
     this.calculateTotalPrince();
   }
 
-  public decreaseProduct(product: SelectedProduct): void{
-    this.cartService.decreaseProductQuantity(product.id);
-    product.quantity -= 1;
+  public decreaseProduct(product: FormGroup): void{
+    this.cartService.decreaseProductQuantity(product.get('id').value);  
+    product.controls.quantity.setValue(product.controls.quantity.value - 1);
     this.calculateTotalPrince();
   }
 
-  public deleteProduct(product: SelectedProduct, pos: number): void{
-    this.cartService.removeProduct(product.id);
-    this.products.splice(pos, 1);
+  public deleteProduct(product: FormGroup, pos: number): void{
+    this.cartService.removeProduct(product.get('id').value);
+    this.productsCtrl.controls.splice(pos, 1);
     this.calculateTotalPrince();
-    if(this.products.length == 0){
+    if(this.productsCtrl.controls.length == 0){
       this.purchaseService.triggerEmptyCart();
     }
   }

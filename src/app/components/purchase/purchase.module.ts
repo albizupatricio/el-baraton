@@ -5,7 +5,7 @@ import { PurchaseComponent } from './purchase.component';
 import { purchaseRoutes } from './purchase.routes';
 import { CartComponent } from './cart/cart.component';
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SummaryComponent } from './summary/summary.component';
 
@@ -21,7 +21,11 @@ import { SummaryComponent } from './summary/summary.component';
     CommonModule,
     FormsModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(purchaseRoutes)
+  ],
+  providers: [
+    FormBuilder
   ]
 })
 export class PurchaseModule { }

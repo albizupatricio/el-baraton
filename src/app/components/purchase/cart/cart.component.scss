@@ -20,9 +20,13 @@
             width: 100%;
             th{
                 text-align: center;
+                border-top: 2px solid #dee2e6;
+                border-bottom: 2px solid #dee2e6;
             }
             td{
                 text-align: center;
+                border-top: none;
+                border-bottom: 1px solid #dee2e6;
                 .product-img{
                     background-repeat: no-repeat;
                     background-position: center center;
