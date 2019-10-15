@@ -14,6 +14,7 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 
   public goToTab(nextTab: boolean){
     this.purchaseService.triggerTabUpdate(nextTab);

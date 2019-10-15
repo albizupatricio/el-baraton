@@ -6,50 +6,152 @@
     <div class="col-4 label">
       Total a pagar
     </div>
-    <div class="col-8 price">
-        ${{totalPriceCtrl.value | number : '1.2'}}
-    </div>
+    <div class="col-8 price">${{ purchaseForm.controls.totalPrice.value | number: "1.2-2" }}</div>
   </div>
   <div class="col-10 information">
     <div class="col-4 label">
-        Seleccione método de pago
-      </div>
-      <div class="col-8 cash-card">
-          <label class="radio-button">
-            <div class="radio-element">              
-              <input type="radio" [value]="true" [formControl]="purchaseForm.get('cashPayment')">
-            </div>            
-            <span>Efectivo</span>
-          </label>
-          <label class="radio-button">
-            <div class="radio-element">
-              <input type="radio" [value]="false" [formControl]="purchaseForm.get('cashPayment')">
-            </div>            
-            <span>Tarjeta de Crédito</span>
-          </label>          
-      </div>
+      Seleccione método de pago
+    </div>
+    <div class="col-8 cash-card">
+      <label class="radio-button">
+        <div class="radio-element">
+          <input type="radio" [value]="true" [formControl]="purchaseForm.controls.cashPayment" />
+        </div>
+        <span>Efectivo</span>
+      </label>
+      <label class="radio-button">
+        <div class="radio-element">
+          <input type="radio" [value]="false" [formControl]="purchaseForm.controls.cashPayment" />
+        </div>
+        <span>Tarjeta de Crédito</span>
+      </label>
+    </div>
   </div>
-  <div class="label-separator" *ngIf="purchaseForm.get('cashPayment').value">Abona con efectivo, retira en sucursal</div>
-  <div class="label-separator" *ngIf="!purchaseForm.get('cashPayment').value">Abona con tarjeta, recibe en su domicilio</div>
-  <!-- <div class="col-10 information">
-    <div class="col-4 label">
-        Seleccione método de pago
+  <div class="label-separator"></div>
+  <div *ngIf="purchaseForm.controls.cashPayment.value">
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Nombre
       </div>
-      <div class="col-8 cash-card">
-          <label class="radio-button">
-            <div class="radio-element">              
-              <input type="radio" [value]="true" [formControl]="purchaseForm.get('cashPayment')">
-            </div>            
-            <span>Efectivo</span>
-          </label>
-          <label class="radio-button">
-            <div class="radio-element">
-              <input type="radio" [value]="false" [formControl]="purchaseForm.get('cashPayment')">
-            </div>            
-            <span>Tarjeta de Crédito</span>
-          </label>          
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.name" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.name.invalid && purchaseForm.controls.name.touched
+          ">
+          Inserte su nombre.
+        </div>
       </div>
-  </div>   -->
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Apellido
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.lastName" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.lastName.invalid &&
+            purchaseForm.controls.lastName.touched
+          ">
+          Inserte su apellido.
+        </div>
+      </div>
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Sucursal
+      </div>
+      <div class="col-8" style="display: flex;">
+        <select class="input-text form-control" [formControl]="purchaseForm.controls.cash.controls.store">
+          <option value="Sucursal1">Sucursal 1</option>
+          <option value="Sucursal2">Sucursal 2</option>
+          <option value="Sucursal3">Sucursal 3</option>
+          <option value="Sucursal4">Sucursal 4</option>
+        </select>
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.cash.controls.store.invalid &&
+            purchaseForm.controls.cash.controls.store.touched
+          ">
+          Seleccione sucursal para retirar sus productos.
+        </div>
+      </div>
+    </div>
+    <div>
+      Abona con efectivo, retira en sucursal
+      <strong>{{ purchaseForm.controls.cash.controls.store.value }}</strong>
+    </div>
+  </div>
+  <div *ngIf="!purchaseForm.controls.cashPayment.value">
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Nombre
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.name" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.name.invalid && purchaseForm.controls.name.touched
+          ">
+          Inserte su nombre.
+        </div>
+      </div>
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Apellido
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.lastName" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.lastName.invalid &&
+            purchaseForm.controls.lastName.touched
+          ">
+          Inserte su apellido.
+        </div>
+      </div>
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Dirección
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.address" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.card.controls.address.invalid && purchaseForm.controls.card.controls.address.touched
+          ">
+          Inserte su dirección.
+        </div>
+      </div>
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Teléfono de Contacto
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.phone" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.card.controls.phone.invalid && purchaseForm.controls.card.controls.phone.touched
+          ">
+          Inserte un número de contacto.
+        </div>
+      </div>
+    </div>
+    <div class="col-10 information">
+      <div class="col-4 label-form">
+        Número de Tarjeta de Crédito
+      </div>
+      <div class="col-8" style="display: flex;">
+        <input type="text" type="tel" pattern="\d*" maxlength="19" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.cardNumber" />
+        <div class="error-message" *ngIf="
+            purchaseForm.controls.card.controls.cardNumber.invalid && purchaseForm.controls.card.controls.cardNumber.touched
+          ">
+          Inserte el número de su tarjeta de crédito.
+        </div>
+      </div>
+    </div>
+    <div>
+      Abona con tarjeta, recibe en 
+      <strong>{{ purchaseForm.controls.card.controls.address.value }}</strong>
+    </div>
+  </div>
 </div>
 <div class="col buttons-container">
   <div class="col">
@@ -57,9 +159,14 @@
       <i class="fa fa-shopping-cart"></i>
       Volver al carro de compras
     </button>
-    <button (click)="goToTab(true)" class="button next float-right">
-      <i class="fa fa-credit-card"></i>
-      Finalizar Compra
+    <button (click)="goToTab(true)" class="button next float-right" [disabled]="
+          purchaseForm.controls.name.invalid || purchaseForm.controls.lastName.invalid || 
+          (purchaseForm.controls.cashPayment.value && purchaseForm.controls.cash.controls.store.invalid) ||
+          (!purchaseForm.controls.cashPayment.value && (purchaseForm.controls.card.controls.cardNumber.invalid ||
+          purchaseForm.controls.card.controls.phone.invalid || purchaseForm.controls.card.controls.address.invalid))
+        ">
+      <i class="fa fa-forward"></i>
+      Continuar con la Compra
     </button>
   </div>
 </div>

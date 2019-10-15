@@ -1,6 +1,82 @@
+<div class="col">
+    <h1 class="title">Resumen de Compra</h1>
+</div>
+<div class="content">
 
-         <div class="col">
-                <h1 class="title">Summary</h1>
-            </div>    
-    <button>Next</button>
-    <button (click)="goToTab(false)">Back</button>
+    <div class="col-10 information">
+        <div class="col-4 label">
+            Nombre
+        </div>
+        <div class="col-8">{{purchaseForm.controls.name.value}}</div>
+    </div>
+    <div class="col-10 information">
+        <div class="col-4 label">
+            Apellido
+        </div>
+        <div class="col-8">{{purchaseForm.controls.lastName.value}}</div>
+    </div>
+    <div *ngIf="purchaseForm.controls.cashPayment.value" class="col-10 information">
+        <div class="col-4 label">
+            Sucursal Elegida
+        </div>
+        <div class="col-8">{{purchaseForm.controls.cash.controls.store.value}}</div>
+    </div>
+    <div *ngIf="!purchaseForm.controls.cashPayment.value">
+        <div class="col-10 information">
+            <div class="col-4 label">
+                Direccion
+            </div>
+            <div class="col-8">{{purchaseForm.controls.card.controls.address.value}}</div>
+        </div>
+        <div  class="col-10 information">
+            <div class="col-4 label">
+                Tarjeta de Crédito
+            </div>
+            <div class="col-8">{{purchaseForm.controls.card.controls.cardNumber.value}}</div>
+        </div>
+        <div class="col-10 information">
+            <div class="col-4 label">
+                Teléfono
+            </div>
+            <div class="col-8">{{purchaseForm.controls.card.controls.phone.value}}</div>
+        </div>
+    </div>
+
+    <div class="label-separator"></div>
+
+
+    <div class="col-10 information">
+        <div class="col-4 label">
+            Productos
+        </div>
+        <div class="col-8">
+            <div class="col-12" class="product" *ngFor="let product of purchaseForm.controls.products.controls">
+                {{product.controls.name.value}} x {{product.controls.quantity.value}} unidades =
+                ${{ (product.controls.price.value * product.controls.quantity.value) | number: "1.2-2" }}
+            </div>
+        </div>
+    </div>
+
+    <div class="label-separator"></div>
+
+    <div class="col-10 information">
+        <div class="col-4 label">
+            Total a pagar
+        </div>
+        <div class="col-8">${{ purchaseForm.controls.totalPrice.value | number: "1.2-2" }}</div>
+    </div>
+
+
+</div>
+<div class="col buttons-container">
+    <div class="col">
+        <button (click)="goToTab(false)" class="button next float-left">
+            <i class="fa fa-shopping-cart"></i>
+            Volver a la Información de Compra
+        </button>
+        <button (click)="goToTab(true)" class="button next float-right">
+            <i class="fa fa-credit-card"></i>
+            Realizar Compra
+        </button>
+    </div>
+</div>

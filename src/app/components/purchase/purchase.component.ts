@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GlobalConstants } from '../../app.constants';
 import { PurchaseService } from './purchase.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-purchase',
@@ -26,12 +26,16 @@ export class PurchaseComponent implements OnInit, OnDestroy {
       products: this.fb.array([]),
       totalPrice: [0],
       cashPayment: [true],
-      store: [''],
-      cardNumber: [''],
-      adress: [''],
-      phone: [''],
-      name: [''],
-      lastName: ['']
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      cash: this.fb.group({
+        store: ['', Validators.required]
+      }),
+      card: this.fb.group({
+        address: ['', Validators.required],
+        cardNumber: ['', Validators.required],
+        phone: ['', Validators.required]
+      }),
     });
   }
 

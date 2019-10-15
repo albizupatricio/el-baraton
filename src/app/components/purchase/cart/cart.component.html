@@ -3,7 +3,7 @@
     <h1 class="title">Carro de Compras</h1>
 </div>
 <div class="content">
-    <div *ngIf="productsCtrl.controls.length > 0" class="row products">
+    <div *ngIf="purchaseForm.get('products').controls.length > 0" class="row products">
         <div class="col-6">
             <table class="table">
                 <thead>
@@ -16,18 +16,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of productsCtrl.controls; let pos = index">
-                        <td class="align-middle name" [routerLink]="['/product', product.get('id').value]">
-                            <div class="product-img" [ngStyle]="{ 'background-image': product.get('photoUrl').value }"></div>
+                    <tr *ngFor="let product of purchaseForm.get('products').controls; let pos = index">
+                        <td class="align-middle name" [routerLink]="['/product', product.controls.id.value]">
+                            <div class="product-img" [ngStyle]="{ 'background-image': product.controls.photoUrl.value }"></div>
                         </td>
-                        <td class="align-middle name" [routerLink]="['/product', product.get('id').value]">{{product.get('name').value}}</td>
-                        <td class="align-middle">${{product.get('price').value}}</td>
+                        <td class="align-middle name" [routerLink]="['/product', product.controls.id.value]">{{product.controls.name.value}}</td>
+                        <td class="align-middle">${{product.controls.price.value}}</td>
                         <td class="align-middle">
-                            <button [disabled]="product.get('quantity').value <= 1" (click)="decreaseProduct(product)" class="button">
+                            <button [disabled]="product.controls.quantity.value <= 1" (click)="decreaseProduct(product)" class="button">
                                 <i class="fa fa-minus"></i>
                             </button>
-                            {{product.get('quantity').value}}
-                            <button [disabled]="product.get('quantity').value >= 10" (click)="addProduct(product)" class="button">
+                            {{product.controls.quantity.value}}
+                            <button [disabled]="product.controls.quantity.value >= 10" (click)="addProduct(product)" class="button">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </td>
@@ -41,7 +41,7 @@
             </table>
         </div>
     </div>
-    <div *ngIf="productsCtrl.controls.length == 0" class="error-message">
+    <div *ngIf="purchaseForm.get('products').controls.length == 0" class="error-message">
         <i class="col-1 fa fa-exclamation-triangle"></i>
         <div class="col-11">
             <div>El carro está vacío.</div> 
@@ -56,12 +56,12 @@
                 Precio Total:
             </span>
             <span class="price">
-                ${{totalPriceCtrl.value | number : '1.2'}}
+                ${{purchaseForm.controls.totalPrice.value | number : '1.2-2'}}
             </span>
         </div>
     </div>
     <div class="col">
-        <button (click)="goToTab()" class="button next float-right" [disabled]="productsCtrl.controls.length == 0">
+        <button (click)="goToTab()" class="button next float-right" [disabled]="purchaseForm.get('products').controls.length == 0">
                 <i class="fa fa-credit-card"></i>
                 Cargar Método de Pago
         </button>
