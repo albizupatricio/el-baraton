@@ -51,9 +51,9 @@ export class CartService {
     if(productsArray === null){
       productsArray = [];
     }
-    const product = productsArray.filter(product => product.id === id)[0].quantity;
+    const product = productsArray.filter(product => product.id === id)[0];
     if (product) {
-      return product;
+      return product.quantity;
     }
     return 0;
   }
