@@ -1,0 +1,29 @@
+<div class="menu">
+    <div class="col-12" style="display: flex;padding-left: 0px;">
+        <div class="title col-3">Categorías</div>
+        <div class="breadcrumbs col-9">
+            <div class="element" (click)="jumpToCategory(breadcrumbs.categoryId)"
+                *ngFor="let breadcrumbs of breadcrumbsNames">
+                {{breadcrumbs.name}} << </div> </div> </div> <div *ngIf="filteredCategories.length > 0">
+                    <div class="loading" *ngIf="loading">
+                        <div class="col text-center">
+                            <div class="spinner-border"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper-categories" *ngIf="!loading">
+                        <div class="item" *ngFor="let category of filteredCategories">
+                            <span class="label" (click)="filterCategories(category)">{{category.name}}</span>
+                        </div>
+                    </div>
+            </div>
+            <div *ngIf="filteredProducts.length > 0">
+                <div class="title">Productos por categoría {{breadcrumbsNames[0].name}}</div>
+                <div class="wrapper-products" *ngIf="!loading">
+                    <div class="item" *ngFor="let product of filteredProducts" [routerLink]="['/product', product.id]" >
+                        <span class="label">{{product.name}}
+                            <div class="product-img" [ngStyle]="{ 'background-image': product.photo_url }"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>

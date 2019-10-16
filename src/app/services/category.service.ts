@@ -15,6 +15,20 @@ export class CategoryService {
     public constants: GlobalConstants
   ) {}
 
+  public getAllCategories(): Observable<Category[]> {
+    const url = this.constants.apiUrlRoutes.categories;
+    return this.appService.httpGet(url).pipe(
+      map(categories => {
+        return categories.categories;
+      }),
+      catchError(error => {
+        console.error("Category cannot be accessed");
+        return of([]);
+      })
+    );
+  }
+
+
   public getCategoriesAndSublevels(id: number): Observable<Category[]> {
     const url = this.constants.apiUrlRoutes.categories;
     return this.appService.httpGet(url).pipe(

@@ -31,14 +31,31 @@ export class CartService {
   }
 
   public getSelectedProduct(id: string): SelectedProduct {
-    const productsArray: SelectedProduct[] = JSON.parse(
+    let productsArray: SelectedProduct[] = JSON.parse(
       localStorage.getItem("products")
     );
+    if(productsArray === null){
+      productsArray = [];
+    }
     const product = productsArray.filter(product => product.id === id)[0];
     if (product) {
       return product;
     }
     return null;
+  }
+
+  public getSelectedProductQuantity(id: string): number {
+    let productsArray: SelectedProduct[] = JSON.parse(
+      localStorage.getItem("products")
+    );
+    if(productsArray === null){
+      productsArray = [];
+    }
+    const product = productsArray.filter(product => product.id === id)[0].quantity;
+    if (product) {
+      return product;
+    }
+    return 0;
   }
 
   public purchaseCompleted(): void {

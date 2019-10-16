@@ -139,7 +139,7 @@
         Número de Tarjeta de Crédito
       </div>
       <div class="col-8" style="display: flex;">
-        <input type="text" type="tel" pattern="\d*" maxlength="19" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.cardNumber" />
+        <input type="text" type="tel" pattern="\d*" maxlength="16" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.cardNumber" />
         <div class="error-message" *ngIf="
             purchaseForm.controls.card.controls.cardNumber.invalid && purchaseForm.controls.card.controls.cardNumber.touched
           ">

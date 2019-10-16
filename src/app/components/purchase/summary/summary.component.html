@@ -32,7 +32,7 @@
             <div class="col-4 label">
                 Tarjeta de Crédito
             </div>
-            <div class="col-8">{{purchaseForm.controls.card.controls.cardNumber.value}}</div>
+            <div class="col-8">XXXX-XXXX-XXXX-{{purchaseForm.controls.card.controls.cardNumber.value.substr(12,4)}}</div>
         </div>
         <div class="col-10 information">
             <div class="col-4 label">
@@ -74,7 +74,7 @@
             <i class="fa fa-shopping-cart"></i>
             Volver a la Información de Compra
         </button>
-        <button (click)="goToTab(true)" class="button next float-right">
+        <button (click)="completePurchase()" class="button next float-right">
             <i class="fa fa-credit-card"></i>
             Realizar Compra
         </button>

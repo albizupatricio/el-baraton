@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { CategoryService } from "src/app/services/category.service";
 import { CartService } from "../purchase/cart/cart.service";
 import Swal from "sweetalert2";
+import { GlobalConstants } from '../../app.constants';
 
 @Component({
   selector: "product",
@@ -19,7 +20,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   public existProduct: boolean;
   public product: Product;
   private subs: Subscription[];
-  private defaultImageUrl: string;
   public addingProduct: boolean;
 
   constructor(
@@ -27,13 +27,13 @@ export class ProductComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private categoryService: CategoryService,
     private cartService: CartService,
-    private location: Location
+    private location: Location,
+    public constants: GlobalConstants
   ) {
     this.loading = true;
     this.existProduct = true;
     this.product = null;
     this.subs = [];
-    this.defaultImageUrl = "../../../assets/default-image_600.png";
     this.addingProduct = false;
   }
 
@@ -69,7 +69,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   private setProductValues(product: Product, categoryTitles: string): void {
     const productInCart = this.cartService.getSelectedProduct(product.id);
-    const productQuantity = productInCart ? productInCart.quantity: 0;  
+    const productQuantity = productInCart ? productInCart.quantity : 0;
     this.product = {
       ...product,
       quantity: product.quantity - productQuantity,
@@ -78,24 +78,36 @@ export class ProductComponent implements OnInit, OnDestroy {
       categoryTitles: categoryTitles ? categoryTitles : "No identificada",
       photo_url: product.photo_url
         ? `url('${product.photo_url}')`
-        : `url('${this.defaultImageUrl}')`
+        : `url('${this.constants.defaultImageUrl}')`
     };
   }
 
   public insertInCart(product: Product): void {
     this.addingProduct = true;
-    this.cartService.addProduct(product.id, product.name, parseFloat(product.price.substr(1).replace('.','').replace(",",".")), product.photo_url);
-    Swal.fire(
-      "Agregado",
-      `${this.product.name.charAt(0).toUpperCase()}${this.product.name.slice(1)} fue agregado a tu carro de compras.`,
-      "success"
-    ).finally(() => {
-      this.product.quantity -= 1;
-      this.addingProduct = false;
-    });
+    if (this.cartService.getSelectedProductQuantity(product.id) < 10) {
+      this.cartService.addProduct(product.id, product.name,
+        parseFloat(product.price.substr(1).replace('.', '').replace(",", ".")), product.photo_url);
+      Swal.fire(
+        "Agregado",
+        `${this.product.name.charAt(0).toUpperCase()}${this.product.name.slice(1)} fue agregado a tu carro de compras.`,
+        "success"
+      ).finally(() => {
+        this.product.quantity -= 1;
+        this.addingProduct = false;
+      });
+    } else {
+      Swal.fire(
+        "Error",
+        `${this.product.name.charAt(0).toUpperCase()}${this.product.name.slice(1)} no puede ser agregado a tu carro, ya que supera la cantidad máxima de productos por compra.`,
+        "error"
+      ).finally(() => {
+        this.addingProduct = false;
+      });
+    }
+
   }
 
-  public goBack(){
+  public goBack() {
     this.location.back();
   }
 

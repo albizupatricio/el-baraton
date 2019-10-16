@@ -16,4 +16,6 @@ export class GlobalConstants{
         paymentMethod: 1,
         summary: 2
     }
+
+    public readonly defaultImageUrl = "../../../assets/default-image_600.png";
 }
