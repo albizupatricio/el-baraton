@@ -27,6 +27,17 @@ export class ProductService {
     );
   }
 
+  public getProductByPartialName(value: string): Observable<Product[]> {
+    const url = this.constants.apiUrlRoutes.products;
+    return this.appService.httpGet(url).pipe(
+      map(products => products['products'].filter((product: Product) => product.name.indexOf(value) !== -1)),
+      catchError(error => {
+        console.error("Product cannot be accessed");
+        return of(null);
+      })
+    );
+  }
+
   public getProductByCategory(categoryId: number): Observable<Product[]> {
     const url = this.constants.apiUrlRoutes.products;
     return this.appService.httpGet(url).pipe(

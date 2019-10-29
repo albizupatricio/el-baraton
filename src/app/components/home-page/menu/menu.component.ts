@@ -6,6 +6,7 @@ import { BreadCrumbs } from 'src/app/models/breadCrumbs';
 import { ProductService } from '../../product/product.service';
 import { Product } from 'src/app/models/product';
 import { GlobalConstants } from '../../../app.constants';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'menu',
@@ -19,8 +20,10 @@ export class MenuComponent implements OnInit, OnDestroy {
   public filteredProducts: Product[] = [];
   public loading: boolean;
   public breadcrumbsNames: BreadCrumbs[] = [];
+  public searchNavExpanded: boolean = false;
   private allCategories = [];
   private subs: Subscription[] = [];
+  public searchCtrl: FormControl = new FormControl('');
 
   constructor(private categoryService: CategoryService, private productService: ProductService,
     public constants: GlobalConstants) { }
@@ -38,6 +41,20 @@ export class MenuComponent implements OnInit, OnDestroy {
           this.filteredCategories.push(category);
         });
         this.loading = false;
+      }),
+      this.searchCtrl.valueChanges.subscribe((value) => {
+        if (value.length > 1) {
+          this.subs.push(this.productService.getProductByPartialName(value).subscribe((products) => {
+            products.forEach((productsElement) => {
+              productsElement.photo_url = productsElement.photo_url
+                ? `url('${productsElement.photo_url}')`
+                : `url('${this.constants.defaultImageUrl}')`;
+            });
+            this.filteredProducts = products;
+          }));
+        } else {
+          this.filteredProducts = [];
+        }
       })
     );
   }

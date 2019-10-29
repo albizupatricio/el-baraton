@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page.component';
 import { MenuComponent } from './menu/menu.component';
@@ -16,7 +16,8 @@ import { RouterModule } from '@angular/router';
             CommonModule,
             FormsModule,
             SharedModule,
-            RouterModule
+            RouterModule,
+            ReactiveFormsModule
         ]
     }
 )

@@ -1,29 +1,49 @@
 <div class="menu">
-    <div class="col-12" style="display: flex;padding-left: 0px;">
-        <div class="title col-3">Categorías</div>
-        <div class="breadcrumbs col-9">
-            <div class="element" (click)="jumpToCategory(breadcrumbs.categoryId)"
-                *ngFor="let breadcrumbs of breadcrumbsNames">
-                {{breadcrumbs.name}} << </div> </div> </div> <div *ngIf="filteredCategories.length > 0">
-                    <div class="loading" *ngIf="loading">
-                        <div class="col text-center">
-                            <div class="spinner-border"></div>
-                        </div>
-                    </div>
-                    <div class="wrapper-categories" *ngIf="!loading">
-                        <div class="item" *ngFor="let category of filteredCategories">
-                            <span class="label" (click)="filterCategories(category)">{{category.name}}</span>
-                        </div>
-                    </div>
+    <button class="button searcher" (click)="searchNavExpanded = !searchNavExpanded">
+        <i *ngIf="!searchNavExpanded" class="fa fa-search"></i>
+        <i *ngIf="searchNavExpanded">
+            <</i> </button> <div *ngIf="searchNavExpanded" class="filters col-3">
+                <div class="card">
+                    <span class="label">Buscador</span>
+                    <input type="search" class="form-control" [formControl]="searchCtrl">
+                    <span class="label">Otros Filtros</span>
+                </div>
+</div>
+    <div class="menu-elements" [ngClass]="{'col-9':searchNavExpanded, 'col-12':!searchNavExpanded}">
+        <div *ngIf="!searchCtrl.value" class="col-12" style="display: flex;padding-left: 0px;">
+            <div class="title col-3">Categorías</div>
+            <div class="breadcrumbs col-9">
+                <div class="element" (click)="jumpToCategory(breadcrumbs.categoryId)"
+                    *ngFor="let breadcrumbs of breadcrumbsNames">
+                    {{breadcrumbs.name}} << 
+                </div> 
+            </div> 
+        </div> 
+        <div *ngIf="!searchCtrl.value && filteredCategories.length > 0">
+            <div class="loading" *ngIf="loading">
+                <div class="col text-center">
+                    <div class="spinner-border"></div>
+                </div>
             </div>
-            <div *ngIf="filteredProducts.length > 0">
-                <div class="title">Productos por categoría {{breadcrumbsNames[0].name}}</div>
-                <div class="wrapper-products" *ngIf="!loading">
-                    <div class="item" *ngFor="let product of filteredProducts" [routerLink]="['/product', product.id]" >
-                        <span class="label">{{product.name}}
-                            <div class="product-img" [ngStyle]="{ 'background-image': product.photo_url }"></div>
-                        </span>
-                    </div>
+            <div class="wrapper-categories" *ngIf="!loading">
+                <div class="item" *ngFor="let category of filteredCategories">
+                    <span class="label" (click)="filterCategories(category)">{{category.name}}</span>
                 </div>
             </div>
         </div>
+        <div *ngIf="filteredProducts.length > 0 || searchCtrl.value">
+            <div *ngIf="!searchCtrl.value" class="title">Productos por categoría {{breadcrumbsNames[0].name}}</div>
+            <div *ngIf="searchCtrl.value" class="title">Productos encontrados para '{{searchCtrl.value}}'</div>
+            <div class="wrapper-products" *ngIf="!loading">
+                <div class="item" *ngFor="let product of filteredProducts" [routerLink]="['/product', product.id]">
+                    <span class="label">
+                        <div class="product-title">{{product.name}}</div>
+                        <div class="product-img"
+                            [ngStyle]="{ 'background-image': product.photo_url, 'width': '100%' }"></div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
