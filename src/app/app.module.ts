@@ -7,6 +7,7 @@ import { GlobalConstants } from './app.constants';
 import { AppComponent } from './app.component';
 import { HomePageModule } from './components/home-page/home-page.module';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     AppService,
-    GlobalConstants
+    GlobalConstants,
+    {provide: APP_BASE_HREF, useValue : '/' }
   ],
   bootstrap: [AppComponent]
 })
