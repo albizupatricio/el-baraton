@@ -13,15 +13,18 @@ export class CartComponent implements OnInit {
 
   @Input() purchaseForm: FormGroup;
 
+  public productsFormCtrl: FormArray;
+
   constructor(private purchaseService: PurchaseService,
               private cartService: CartService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.productsFormCtrl = this.purchaseForm.get('products') as FormArray;
     this.purchaseForm.controls.totalPrice.setValue(0);
     this.purchaseForm.controls.products = this.fb.array([]);
     this.cartService.getAllSavedProducts().map((product: SelectedProduct) => {
-      (this.purchaseForm.get('products') as FormArray).push(
+      this.productsFormCtrl.push(
         this.fb.group({
           quantity: [product.quantity],
           price: [product.price],
@@ -40,7 +43,7 @@ export class CartComponent implements OnInit {
 
   private calculateTotalPrince(): void {
     let price = 0;
-    (this.purchaseForm.get('products') as FormArray).controls.forEach((product: FormGroup) => {
+    this.productsFormCtrl.controls.forEach((product: FormGroup) => {
       price += product.controls.price.value * product.controls.quantity.value;
     });
     this.purchaseForm.controls.totalPrice.setValue(price);
@@ -60,9 +63,9 @@ export class CartComponent implements OnInit {
 
   public deleteProduct(product: FormGroup, pos: number): void {
     this.cartService.removeProduct(product.controls.id.value);
-    (this.purchaseForm.get('products') as FormArray).controls.splice(pos, 1);
+    this.productsFormCtrl.controls.splice(pos, 1);
     this.calculateTotalPrince();
-    if ((this.purchaseForm.get('products') as FormArray).controls.length == 0) {
+    if (this.productsFormCtrl.controls.length === 0) {
       this.purchaseService.triggerEmptyCart();
     }
   }

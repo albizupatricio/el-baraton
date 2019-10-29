@@ -16,7 +16,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   private subs: Subscription[];
   public purchaseForm: FormGroup;
 
-  constructor(private globalConstants: GlobalConstants, 
+  constructor(public globalConstants: GlobalConstants, 
               private purchaseService: PurchaseService,
               private fb: FormBuilder) { 
     this.tab = this.globalConstants.tabs.cart;

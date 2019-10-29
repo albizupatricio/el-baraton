@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PurchaseService } from '../purchase.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import Swal from "sweetalert2";
 import { CartService } from '../cart/cart.service';
 import { Router } from '@angular/router';
@@ -13,9 +13,16 @@ import { Router } from '@angular/router';
 export class SummaryComponent implements OnInit {
   @Input() purchaseForm: FormGroup;
 
+  public cash: FormGroup;
+  public card: FormGroup;
+  public products: FormArray;
+
   constructor(private purchaseService: PurchaseService, private cartService: CartService, private router: Router) { }
 
   ngOnInit() {
+    this.cash = this.purchaseForm.controls.cash as FormGroup;
+    this.card = this.purchaseForm.controls.card as FormGroup;
+    this.products = this.purchaseForm.controls.products as FormArray;
   }
 
 

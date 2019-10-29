@@ -19,26 +19,26 @@
         <div class="col-4 label">
             Sucursal Elegida
         </div>
-        <div class="col-8">{{purchaseForm.controls.cash.controls.store.value}}</div>
+        <div class="col-8">{{cash.controls.store.value}}</div>
     </div>
     <div *ngIf="!purchaseForm.controls.cashPayment.value">
         <div class="col-10 information">
             <div class="col-4 label">
                 Direccion
             </div>
-            <div class="col-8">{{purchaseForm.controls.card.controls.address.value}}</div>
+            <div class="col-8">{{card.controls.address.value}}</div>
         </div>
         <div  class="col-10 information">
             <div class="col-4 label">
                 Tarjeta de Crédito
             </div>
-            <div class="col-8">XXXX-XXXX-XXXX-{{purchaseForm.controls.card.controls.cardNumber.value.substr(12,4)}}</div>
+            <div class="col-8">XXXX-XXXX-XXXX-{{card.controls.cardNumber.value.substr(12,4)}}</div>
         </div>
         <div class="col-10 information">
             <div class="col-4 label">
                 Teléfono
             </div>
-            <div class="col-8">{{purchaseForm.controls.card.controls.phone.value}}</div>
+            <div class="col-8">{{card.controls.phone.value}}</div>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
             Productos
         </div>
         <div class="col-8">
-            <div class="col-12" class="product" *ngFor="let product of purchaseForm.controls.products.controls">
+            <div class="col-12" class="product" *ngFor="let product of products.controls">
                 {{product.controls.name.value}} x {{product.controls.quantity.value}} unidades =
                 ${{ (product.controls.price.value * product.controls.quantity.value) | number: "1.2-2" }}
             </div>

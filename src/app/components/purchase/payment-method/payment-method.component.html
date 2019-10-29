@@ -61,15 +61,15 @@
         Sucursal
       </div>
       <div class="col-8" style="display: flex;">
-        <select class="input-text form-control" [formControl]="purchaseForm.controls.cash.controls.store">
+        <select class="input-text form-control" [formControl]="cash.controls.store">
           <option value="Sucursal1">Sucursal 1</option>
           <option value="Sucursal2">Sucursal 2</option>
           <option value="Sucursal3">Sucursal 3</option>
           <option value="Sucursal4">Sucursal 4</option>
         </select>
         <div class="error-message" *ngIf="
-            purchaseForm.controls.cash.controls.store.invalid &&
-            purchaseForm.controls.cash.controls.store.touched
+          cash.controls.store.invalid &&
+          cash.controls.store.touched
           ">
           Seleccione sucursal para retirar sus productos.
         </div>
@@ -77,7 +77,7 @@
     </div>
     <div>
       Abona con efectivo, retira en sucursal
-      <strong>{{ purchaseForm.controls.cash.controls.store.value }}</strong>
+      <strong>{{ cash.controls.store.value }}</strong>
     </div>
   </div>
   <div *ngIf="!purchaseForm.controls.cashPayment.value">
@@ -113,9 +113,9 @@
         Dirección
       </div>
       <div class="col-8" style="display: flex;">
-        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.address" />
+        <input type="text" class="input-text form-control" [formControl]="card.controls.address" />
         <div class="error-message" *ngIf="
-            purchaseForm.controls.card.controls.address.invalid && purchaseForm.controls.card.controls.address.touched
+            card.controls.address.invalid && card.controls.address.touched
           ">
           Inserte su dirección.
         </div>
@@ -126,9 +126,9 @@
         Teléfono de Contacto
       </div>
       <div class="col-8" style="display: flex;">
-        <input type="text" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.phone" />
+        <input type="text" class="input-text form-control" [formControl]="card.controls.phone" />
         <div class="error-message" *ngIf="
-            purchaseForm.controls.card.controls.phone.invalid && purchaseForm.controls.card.controls.phone.touched
+            card.controls.phone.invalid && card.controls.phone.touched
           ">
           Inserte un número de contacto.
         </div>
@@ -139,9 +139,9 @@
         Número de Tarjeta de Crédito
       </div>
       <div class="col-8" style="display: flex;">
-        <input type="text" type="tel" pattern="\d*" maxlength="16" class="input-text form-control" [formControl]="purchaseForm.controls.card.controls.cardNumber" />
+        <input type="text" type="tel" pattern="\d*" maxlength="16" class="input-text form-control" [formControl]="card.controls.cardNumber" />
         <div class="error-message" *ngIf="
-            purchaseForm.controls.card.controls.cardNumber.invalid && purchaseForm.controls.card.controls.cardNumber.touched
+            card.controls.cardNumber.invalid && card.controls.cardNumber.touched
           ">
           Inserte el número de su tarjeta de crédito.
         </div>
@@ -149,7 +149,7 @@
     </div>
     <div>
       Abona con tarjeta, recibe en 
-      <strong>{{ purchaseForm.controls.card.controls.address.value }}</strong>
+      <strong>{{ card.controls.address.value }}</strong>
     </div>
   </div>
 </div>
@@ -161,9 +161,9 @@
     </button>
     <button (click)="goToTab(true)" class="button next float-right" [disabled]="
           purchaseForm.controls.name.invalid || purchaseForm.controls.lastName.invalid || 
-          (purchaseForm.controls.cashPayment.value && purchaseForm.controls.cash.controls.store.invalid) ||
-          (!purchaseForm.controls.cashPayment.value && (purchaseForm.controls.card.controls.cardNumber.invalid ||
-          purchaseForm.controls.card.controls.phone.invalid || purchaseForm.controls.card.controls.address.invalid))
+          (purchaseForm.controls.cashPayment.value && cash.controls.store.invalid) ||
+          (!purchaseForm.controls.cashPayment.value && (card.controls.cardNumber.invalid ||
+          card.controls.phone.invalid || card.controls.address.invalid))
         ">
       <i class="fa fa-forward"></i>
       Continuar con la Compra

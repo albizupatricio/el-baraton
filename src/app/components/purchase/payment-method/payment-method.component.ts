@@ -12,17 +12,21 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   @Input() purchaseForm: FormGroup;
 
   private subs: Subscription[] = [];
+  public cash: FormGroup;
+  public card: FormGroup;
 
   constructor(private purchaseService: PurchaseService) {
   }
 
   ngOnInit() {
+    this.cash = this.purchaseForm.controls.cash as FormGroup;
+    this.card = this.purchaseForm.controls.card as FormGroup;
     this.subs.push(
       this.purchaseForm.controls.cashPayment.valueChanges.subscribe((cash) => {
         if (cash) {
-          this.purchaseForm.controls.cash.reset();
+          this.cash.reset();
         } else {
-          this.purchaseForm.controls.card.reset();
+          this.card.reset();
         }
       })
     );
